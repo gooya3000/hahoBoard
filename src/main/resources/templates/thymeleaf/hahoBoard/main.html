@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MAIN</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../js/main_top.js"></script>
+  </head>
+  <body>
+    <div id="contents">
+
+      <div id="welcome">
+        <div class="container cont1">
+
+          <p id="welcome_sign"><span class="nick">사용자123</span>님 반가워요!</p>
+          <div id="my_menu">
+            <a href="#">
+              <div class="menuBtn">
+                마이페이지
+              </div>
+            </a>
+            <a href="#">
+              <div class="menuBtn">
+                로그아웃
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="main_cont">
+        <div class="container">
+          <ul id="main_menu" class="clearfix">
+
+            <li class="menu_li"><a th:href="@{/board/list}"><div class="menu">게시판1</div></a></li>
+            <li class="menu_li"><a href="#"><div class="plus">+</div></a></li>
+
+          </ul>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+  </body>
+</html>

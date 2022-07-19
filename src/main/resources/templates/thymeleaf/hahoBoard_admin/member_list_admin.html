@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LIST</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/board_list.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+  	<!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard_admin/header_admin.html"></div>
+	<!-- 사이드네비 인클루드 영역 -->
+  	<div th:include="thymeleaf/hahoBoard_admin/sideNav_admin.html"></div>
+  
+    <div class="container">
+<form th:action="@{/admin/memberDelAction}" name="frm" method="post">
+      <h2>게시판1</h2>
+      
+      <table>
+        <tr>
+          <th>no.</th><th>아이디</th><th>닉네임</th><th>가입일</th><th>인증</th><th>선택</th>
+        </tr>
+        <th:block th:each="dto,aaa : ${memberList}">
+        <tr>
+          <td class="center">[[${aaa.count}]]</td><td class="center">[[${dto.memberId}]]</td><td class="center">[[${dto.memberNick}]]</td><td class="center" th:text="${#dates.format(dto.memberRegi, 'yyyy-MM-dd')}"></td>
+          <td><span th:if="${dto.memberJoin != null}">완료</span><span th:if="${dto.memberJoin == null}">-</span></td>
+          <td class="center"><input type="checkbox" name="memberDel" th:value="${dto.memberId}"></td>
+        </tr>
+        </th:block>
+      </table>
+      
+
+      <div class="write_btn">
+        <input type="submit" name="writeBtn" value="회원탈퇴" class="writeBtn">
+      </div>
+      <div class="paging">
+        <a href="#">1</a>
+      </div>
+</form>
+    </div>
+
+
+
+  </body>
+</html>

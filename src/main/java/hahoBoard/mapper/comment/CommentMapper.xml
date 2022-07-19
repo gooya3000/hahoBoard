@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hahoBoard.mapper.comment.CommentMapper">
+	<sql id="basecolumn">
+		COMMENT_NUM, COMMENT_CONT, COMMENT_ID, COMMENT_REGI, COMMENT_IPADDR, BOARD_NUM
+	</sql>
+	<insert id="insertComment" parameterType="hahoBoard.domain.board.CommentDTO">
+	 insert into comment_h(<include refid="basecolumn"/>)
+	 values((SELECT IFNULL(MAX(COMMENT_NUM) + 1, 1) FROM comment c), #{commentCont}, #{commentId}, now(),
+	 #{commentIpAddr}, #{boardNum})
+	</insert>
+	
+	<resultMap type="hahoBoard.domain.board.CommentDTO" id="selectComment" >
+		<id column="COMMENT_NUM" property="commentNum"/>	
+		<result column="COMMENT_CONT" property="commentCont"/>
+		<result column="COMMENT_ID" property="commentId"/>
+		<result column="COMMENT_REGI" property="commentRegi"/>
+		<result column="COMMENT_IPADDR" property="commentIpAddr"/>
+		<result column="BOARD_NUM" property="boardNum"/>
+		<result column="MEMBER_NICK" property="memberNick"/>
+		<result column="MEMBER_LV" property="memberLv"/>
+		
+	</resultMap>
+	
+	<select id="selectComments" resultMap="selectComment" parameterType="hahoBoard.domain.board.CommentDTO">
+		select COMMENT_NUM, COMMENT_CONT, COMMENT_ID, COMMENT_REGI, COMMENT_IPADDR, c.BOARD_NUM, MEMBER_NICK, MEMBER_LV
+		from comment_h c join member_h m
+		on c.comment_id = m.member_id
+		where board_num = #{boardNum}
+		order by COMMENT_REGI asc
+	</select>
+	
+	
+	
+	<delete id="delComment" parameterType="int">
+		delete from comment_h
+		where comment_num = #{commentNum}		
+	</delete>
+	
+</mapper>

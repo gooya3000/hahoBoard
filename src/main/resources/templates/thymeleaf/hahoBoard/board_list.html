@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LIST</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/board_list.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  </head>
+  <body class="clearfix">
+   <!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard/header.html"></div>
+  
+  	<!-- 사이드네비 인클루드 영역 -->
+  	<div th:include="thymeleaf/hahoBoard/sideNav.html"></div>
+  	
+  	
+  	<div id="contents">
+  		 <div class="container">
+
+      <h2>게시판1</h2>
+      <table>
+        <tr>
+          <th>no.</th><th>제목</th><th>작성자</th><th>작성일</th>
+        </tr>
+        <th:block th:each="dto,aaa : ${boardList}">
+		<tr><td>[[${aaa.count}]]</td><td class="subject"><a th:href="@{/board/post(boardNum=${dto.boardNum})}">[[${dto.boardSubj}]]</a></td>
+		<td>[[${dto.memberNick}]]</td><td th:text="${#dates.format(dto.boardRegi,'yyyy-MM-dd')}"></td></tr>
+		</th:block>
+		
+      </table>
+      <div class="write_btn">
+        <a th:href="@{/board/write}"><input type="button" name="writeBtn" value="글쓰기" class="writeBtn"></a>
+      </div>
+      <div class="paging">
+        <a href="#">1</a>
+      </div>
+
+    </div>
+  	</div>
+   
+
+
+
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SIDE_NAV</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/sideNav.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" th:src="@{/static/js/main_top.js}"></script>
+  </head>
+  <body>
+  <div class="hamburger">
+      	<div class="hams">
+        	<div class="ham"></div>
+      	</div>
+    </div>
+
+    <div id="side_nav">
+
+      <div id="my_menu">
+        <a href="#">
+          <div class="menuBtn">
+            마이페이지
+          </div>
+        </a>
+        <a th:href="@{/logout_ad}">
+          <div class="menuBtn">
+            로그아웃
+          </div>
+        </a>
+      </div>
+
+      <div id="board_menu">
+        <ul>
+          <li class="side_li"><a th:href="@{/admin/memberList}" class="hover">회원 관리</a></li>
+          <li class="side_li"><a th:href="@{/admin/boardList}" class="hover">게시판 관리</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LOGIN</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  
+  	<!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard/header.html"></div>
+
+    <div class="loginTitle">
+      <h2 class="loginH2">회원가입 인증 실패!</h2>
+    </div>
+
+      <div class="join">
+        <p>이미 인증이 완료되었거나 유효하지 않은 요청입니다.</p>
+      </div>
+
+
+
+  </body>
+</html>

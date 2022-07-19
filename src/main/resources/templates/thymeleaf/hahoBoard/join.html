@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+  <head>
+    <meta charset="utf-8">
+    <title>JOIN US</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+  
+  <!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard/header.html"></div>
+
+    <div class="loginTitle">
+		<h2 class="loginH2">회원가입</h2>
+	</div>
+
+	<div class="login-area">
+		<form th:action="@{/joinAction}" method="post" name="frm" id="frm" th:object="${memberCommand}">
+			<div class="inner">
+				<div class="form-group">
+					<input type="text" class="input" name="memberId" placeholder="아이디" autofocus="autofocus" th:field="*{memberId}"/>
+					<span class="check">&nbsp;&nbsp;&nbsp;아이디는 회사 이메일입니다.</span>				
+					<span th:text="${duplicate_userId}" class="red"></span>
+					<span th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}" class="red"></span>
+				</div>
+				<div class="form-group">
+					<input type="text" class="input" name="memberNick" id="" value=""
+						placeholder="닉네임" th:field="*{memberNick}"/>
+						<span class="check">&nbsp;&nbsp;&nbsp;닉네임은 10자 이하로 작성해주세요.</span>
+						<span th:if="${#fields.hasErrors('memberNick')}" th:errors="*{memberNick}" class="red"></span>
+				</div>
+				<div class="form-group">
+					<input type="password" class="input" name="memberPass" id="" value=""
+						placeholder="비밀번호" th:field="*{memberPass}"/>
+						<span class="check">&nbsp;&nbsp;&nbsp;비밀번호는 10자 이상으로 작성해주세요.</span>
+						<span th:if="${#fields.hasErrors('memberPass')}" th:errors="*{memberPass}" class="red"></span>
+				</div>
+				<div class="form-group">
+					<input type="password" class="input" name="memberPassCon" id="" value=""
+						placeholder="비밀번호 확인" th:field="*{memberPassCon}"/>
+						<span th:if="${#fields.hasErrors('memberPassCon')}" th:errors="*{memberPassCon}" class="red"></span>
+						<span th:text="${valid_userPwCon}" class="red"></span>
+				</div>
+
+				<div class="form-group">
+					<input type="submit" class="submit" value="JOIN"/>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+  </body>
+</html>

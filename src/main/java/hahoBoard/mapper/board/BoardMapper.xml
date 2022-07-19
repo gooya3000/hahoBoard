@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hahoBoard.mapper.board.BoardMapper">
+	<sql id="basecolumn">
+		BOARD_NUM, BOARD_CG_NUM, BOARD_SUBJ, BOARD_CONT, BOARD_FILE_ORG, BOARD_FILE_STR, BOARD_ID, BOARD_REGI, BOARD_IPADDR, BOARD_PASS
+	</sql>
+	<insert id="insertBoard" parameterType="hahoBoard.domain.board.BoardDTO">
+		insert into board_h(<include refid="basecolumn"/>)
+		values((SELECT IFNULL(MAX(board_num) + 1, 1) FROM board b), 1, #{boardSubj},#{boardCont},
+		#{boardFileOrg},#{boardFileStr},#{boardId},now(),#{boardIpAddr},#{boardPass})
+	</insert>
+	
+	<resultMap type="hahoBoard.domain.board.BoardDTO" id="selectPost" >
+		<id column="BOARD_NUM" property="boardNum"/>	
+		<result column="BOARD_CG_NUM" property="boardCgNum"/>
+		<result column="BOARD_SUBJ" property="boardSubj"/>
+		<result column="BOARD_CONT" property="boardCont"/>
+		<result column="BOARD_FILE_ORG" property="boardFileOrg"/>
+		<result column="BOARD_FILE_STR" property="boardFileStr"/>
+		<result column="BOARD_ID" property="boardId"/>
+		<result column="BOARD_REGI" property="boardRegi"/>
+		<result column="BOARD_IPADDR" property="boardIpAddr"/>
+		<result column="BOARD_PASS" property="boardPass"/>
+		<result column="MEMBER_NICK" property="memberNick"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="selectPost" parameterType="hahoBoard.domain.board.BoardDTO">
+		select
+		b.BOARD_NUM, b.BOARD_CG_NUM, b.BOARD_SUBJ, b.BOARD_CONT, b.BOARD_FILE_ORG, b.BOARD_FILE_STR, b.BOARD_ID, b.BOARD_REGI, b.BOARD_IPADDR, b.BOARD_PASS, m.MEMBER_NICK
+		from board_h b join member_h m
+		on b.board_id = m.member_id
+		order by BOARD_REGI desc
+	</select>
+	
+	<select id="selectOne" resultMap="selectPost" parameterType="hahoBoard.domain.board.BoardDTO">
+		select
+		b.BOARD_NUM, b.BOARD_CG_NUM, b.BOARD_SUBJ, b.BOARD_CONT, b.BOARD_FILE_ORG, b.BOARD_FILE_STR, b.BOARD_ID, b.BOARD_REGI, b.BOARD_IPADDR, b.BOARD_PASS, m.MEMBER_NICK
+		from board_h b join member_h m
+		on b.board_id = m.member_id
+		where board_num = #{boardNum}
+	</select>
+	
+	<delete id="delPost" parameterType="int">
+		delete from board_h
+		where board_num = #{boardNum}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>WRITE</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/board_write.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+	
+  </head>
+  <body>
+    <!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard/header.html"></div>
+  
+  	<!-- 사이드네비 인클루드 영역 -->
+  	<div th:include="thymeleaf/hahoBoard/sideNav.html"></div>
+
+    <div class="container">
+      <form class="" th:action="@{/board/writeAction}" method="post" enctype="multipart/form-data" th:object="${boardCommand}">
+        <h2>게시판1</h2>
+        <table>
+
+            <tr><th>제목</th><td><input type="text" name="boardSubj" value="" class="input" th:field="*{boardSubj}" autofocus="autofocus">      
+					<span th:if="${#fields.hasErrors('boardSubj')}" th:errors="*{boardSubj}" class="red"></span>
+            </td></tr>
+            <tr><th>내용</th><td><textarea name="boardCont" class="textarea"></textarea></td></tr>
+            <tr><th>첨부파일(최대3개)</th><td><input type="file" name="boardFile" multiple="multiple"/>
+            <span th:text="${file_info}" class="red"></span>
+            </td></tr>           
+            <tr><th>글비밀번호</th><td><input type="password" name="boardPass" value="" class="input" th:field="*{boardPass}">
+            <span th:if="${#fields.hasErrors('boardPass')}" th:errors="*{boardPass}" class="red">
+            </td></tr>
+
+        </table>
+        <div class="write_btn">
+          <input type="submit" name="writeBtn" value="완료" class="writeBtn">
+          <a th:href="@{/board/list}"><input type="button" name="writeBtn" value="목록" class="writeBtn"></a>
+        </div>
+      </form>
+
+    </div>
+
+  </body>
+</html>

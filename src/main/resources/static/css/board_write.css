@@ -1,0 +1,47 @@
+h2{
+  text-align: center;
+  margin: 100px;
+  margin-top: 170px;
+}
+
+table{
+  width: 100%;
+}
+
+th, td{
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+th{
+	width: 20%;
+}
+
+.write_btn{
+  text-align: right;
+  padding-top: 20px;
+  margin-bottom: 200px;
+}
+.writeBtn{
+  width: 200px;
+  height: 40px;
+  background-color: rgb(73, 153, 182); /*진한초록*/
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  color:#fff;
+  line-height: 30px;
+  display: inline-block;
+  font-size: 16px;
+}
+.input{
+  width: 98%;
+  margin: 0 auto;
+  height: 25px;
+  padding: 5px;
+}
+.textarea{
+  width: 98%;
+  margin: 0 auto;
+  height: 200px;
+  padding: 5px;
+}

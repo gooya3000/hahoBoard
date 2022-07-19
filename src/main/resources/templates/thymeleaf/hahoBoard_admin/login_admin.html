@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LOGIN</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  	 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  	<script type="text/javascript" th:src="@{/static/js/main_top.js}"></script>
+  </head>
+  <body>
+  
+  	<!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard_admin/header_admin.html"></div>
+	
+	<!-- 로그인 전 -->
+	<span th:if="${session.authInfo == null OR session.authInfo.lv == 0}">
+    <div class="loginTitle">
+      <h2 class="loginH2">로그인</h2>
+    </div>
+    <div class="admin">
+      관리자 계정 로그인
+    </div>
+    <div class="login-area">
+
+				<form th:action="@{/admin/loginAction}" method="post" name="frm" id="frm">
+				
+					<div class="inner">
+						<div class="form-group">
+							<input type="text" class="input" name="memberId" id="" value="" placeholder="회사EMAIL" />
+							<span th:text="${valid_user}" class="red"></span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="input" name="memberPass" id="" value="" placeholder="PASSWORD" />
+							<span th:text="${valid_pw}" class="red"></span>
+							<span th:if="${session.authInfo != null && session.authInfo.lv == 0}"  class="red">*관리자 권한이 없습니다.</span>
+						</div>
+						<div class="form-group">
+							<input type="submit" class="submit" value="LOGIN"/>
+						</div>
+
+					</div>
+				</form>
+			</div>
+	</span>
+	
+	<!-- 로그인 후 -->
+    <span th:if="${session.authInfo != null && session.authInfo.lv >= 1}">
+    	<div id="contents">
+
+      <div id="welcome">
+        <div class="container cont1">
+
+          <p id="welcome_sign"><span class="nick">[[${session.authInfo.nick}]]</span>님 반가워요!</p>
+          <div id="my_menu">
+            <a href="#">
+              <div class="menuBtn">
+                마이페이지
+              </div>
+            </a>
+            <a th:href="@{/logout_ad}">
+              <div class="menuBtn">
+                로그아웃
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="main_cont">
+        <div class="container">
+          <ul id="main_menu2" class="clearfix">
+
+            <li class="menu_li_ad"><a th:href="@{/admin/memberList}"><div class="menu">회원관리</div></a></li>
+            <li class="menu_li_ad"><a th:href="@{/admin/boardList}"><div class="menu">게시판 관리</div></a></li>
+
+
+          </ul>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+    </span>
+
+
+
+  </body>
+</html>

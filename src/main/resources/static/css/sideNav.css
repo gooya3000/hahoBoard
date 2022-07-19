@@ -1,0 +1,121 @@
+.hamburger{
+    position: fixed;
+    cursor: pointer;
+    width: 24px;
+    height: 22px;
+    top:15px;
+    left: 15px;
+    
+    z-index: 999;
+  }
+  .hamburger .hams{
+    width: 24px;
+    height: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hamburger .hams .ham{
+    width: 21px;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 0.5s;
+  }
+  .hamburger .hams .ham:before,
+  .hamburger .hams .ham:after{
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 2px;
+    background-color: #fff;
+    
+    transition: 0.5s;
+  }
+  .hamburger .hams .ham:before{ top: -7px;}
+  .hamburger .hams .ham:after{ top: 7px;}
+  .hamburger.active .hams .ham{
+    background-color: rgba(0,0,0,0);
+    
+  }
+  .hamburger.active .hams .ham:before{
+    top:0;
+    transform: rotate(45deg);
+  }
+  .hamburger.active .hams .ham:after{
+    top:0;
+    transform: rotate(135deg);
+  }
+
+
+#side_nav{
+  width: 200px;
+
+  background-color: rgb(201, 228, 237); /*�뿰�븳珥덈줉*/
+  height: 100vh;  
+  position: fixed;
+  top:0;
+  left: -200px;
+  z-index: 333;
+  transition: 0.5s ease;
+}
+
+#side_nav.active{
+	left:0;
+}
+
+
+
+#my_menu{
+  width: 170px;
+  margin: 0 auto;
+  padding-top: 110px;
+  font-size: 14px;
+}
+
+.menuBtn{
+  width: 170px;
+  height: 30px;
+  background-color: rgb(243, 243, 243); /*�뿰�븳�쉶�깋*/
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  color:rgb(73, 153, 182); /*吏꾪븳珥덈줉*/
+  line-height: 30px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#board_menu{
+  width: 170px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.hover:hover{
+  color:rgb(73, 153, 182); /*吏꾪븳珥덈줉*/
+}
+#plus_btn{
+  width: 170px;
+  margin: 0 auto;
+
+}
+#plus{
+  width: 30px;
+  height: 30px;
+  background-color: rgb(243, 243, 243); /*�뿰�븳�쉶�깋*/
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  color:rgb(73, 153, 182); /*吏꾪븳珥덈줉*/
+  line-height: 30px;
+  font-size:14px;
+}
+.side_li{
+  margin-bottom: 10px;
+}

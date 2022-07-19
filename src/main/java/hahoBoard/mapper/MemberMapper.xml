@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hahoBoard.mapper.MemberMapper">
+	
+	<insert id="insertMember" parameterType="hahoBoard.domain.member.MemberDTO">
+		insert into member_h ( MEMBER_ID, MEMBER_NICK, MEMBER_PASS, MEMBER_REGI, MEMBER_LV, MEMBER_JOIN )
+		values(#{memberId},#{memberNick},#{memberPass},now(),0, NULL)
+    </insert>
+    
+   <!-- <resultMap type="hahoBoard.domain.member.MemberDTO" id="selectMem" >
+		<constructor>
+			<idArg column="member_Id" javaType="string" />
+			<arg column="member_nick" javaType="string" />
+			<arg column="member_pass" javaType="string" />
+			<arg column="member_regi" javaType="java.sql.Timestamp"/>
+			<arg column="member_lv" javaType="int" />
+			<arg column="member_join" javaType="string" />			
+		</constructor>
+	</resultMap> -->
+	
+	<resultMap type="hahoBoard.domain.member.MemberDTO" id="selectMem" >
+		<id column="MEMBER_ID" property="memberId"/>	
+		<result column="MEMBER_NICK" property="memberNick"/>
+		<result column="MEMBER_PASS" property="memberPass"/>
+		<result column="MEMBER_REGI" property="memberRegi"/>
+		<result column="MEMBER_LV" property="memberLv"/>
+		<result column="MEMBER_JOIN" property="memberJoin"/>
+	</resultMap>
+    
+    <select id="selectMember" parameterType="hahoBoard.domain.member.MemberDTO" resultMap="selectMem">
+    	select * from member_h where member_id = #{memberId}
+    </select>
+    
+    <select id="selectLoginMember" parameterType="hahoBoard.domain.member.MemberDTO" resultMap="selectMem">
+    	select * from member_h
+    	where member_id = #{memberId} and member_join is not null
+	
+    </select>
+    
+    <select id="selectMembers" parameterType="hahoBoard.domain.member.MemberDTO" resultMap="selectMem">
+    	select *
+    	from
+    	member_h
+    	order by member_regi desc
+    </select>
+    
+    <update id="updateJoin" parameterType="hahoBoard.domain.member.MemberDTO">
+    	update member_h
+		set member_join = #{memberJoin}
+		where member_id = #{memberId}
+		and member_join is null
+    </update>
+    
+    <delete id="deleteMember" parameterType="string">
+    	delete from member_h
+    	where member_id = #{memberId}
+    </delete>
+
+</mapper>

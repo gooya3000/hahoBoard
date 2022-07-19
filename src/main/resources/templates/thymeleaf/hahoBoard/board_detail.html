@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DETAIL</title>
+    <link rel="stylesheet" th:href="@{/static/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/static/css/board_detail.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+   	<!--header인클루드 영역 -->
+	<div th:include="thymeleaf/hahoBoard/header.html"></div>
+	
+	<!-- 사이드네비 인클루드 영역 -->
+  	<div th:include="thymeleaf/hahoBoard/sideNav.html"></div>
+  	
+  	
+	<!--  <div class="rela">
+	
+		<div class="modal">
+
+      <div class="modal_box">
+        <div class="cancle_box">
+          <a href="#">X</a>
+        </div>
+        <h3>게시물을 <span class="green">삭제</span>하시겠습니까?</h3>
+        <div class="input_box">
+          <input type="password" name="boardPass" placeholder="게시글 비밀번호 입력" class="pw_input"/></br>
+          <input type="hidden" name="boardNum" th:value="${detailPost.boardNum}"/>
+          <input type="submit" name="" value="SUBMIT" class="pw_submit">
+        </div>
+
+      </div>
+
+    </div>-->
+    
+    
+  
+  
+
+    <div class="container">
+
+
+
+      <h2>게시판1</h2>
+      <table>
+
+          <tr><th>제목</th><td>[[${detailPost.boardSubj}]]</td></tr>
+          <tr><th>작성자</th><td>[[${detailPost.memberNick}]]</td></tr>
+          <tr><td colspan="2">[[${detailPost.boardCont}]]</td></tr>
+          <tr><th>첨부파일</th>
+            <td class="clearfix">
+            <ul class="org">
+            	<block th:each=" lang : ${#strings.arraySplit(detailPost.boardFileOrg,'`')}" th:remove="tag">            	
+            	<li>
+            		[[${lang}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	</li>
+            </block>
+            </ul>
+            <ul class="str">
+            <block th:each=" lang2 : ${#strings.arraySplit(detailPost.boardFileStr,'`')}" th:remove="tag">            	
+            	<li><a th:href="@{/static/uploadFile/} + ${lang2}" class="str_green">
+            		&rtrif;download
+            	</a></li>
+            </block>
+            </ul></td></tr>
+
+      </table>
+      <div class="comment_output">
+      
+      	<ul class="comment">
+      	<th:block th:each="dto,aaa : ${comments}">
+      		<li class="clearfix"><h5>[[${dto.memberNick}]]</h5><p class="cont">&rdca;&nbsp;&nbsp;[[${dto.commentCont}]]</p>
+      		<p class="regi">[[${dto.commentRegi}]]</p>
+      		<span th:if="${session.authInfo.id == dto.commentId || session.authInfo.lv == 1}"><div>
+      		<a th:href="@{/board/commentDel(commentNum=${dto.commentNum},boardNum=${detailPost.boardNum})}">
+      		<input type="button" value="삭제" class="delComment"/></a></div></span></li>
+      	</th:block>
+      	</ul>
+
+      </div>
+      <div class="write_btn">
+      <form name="frm" th:action="@{/board/comment}" method="post">
+        <div class="comment_box">
+          
+            <input type="text" name="commentCont" value="" class="comment_input" placeholder="댓글을 입력해주세요.">
+            <input type="hidden" name="boardNum" th:value="${detailPost.boardNum}" class="comment_input">
+          
+        </div>
+        <input type="submit" name="writeBtn" value="댓글등록" class="writeBtn yellow">
+       </form>
+      </div>
+
+      <div class="user_menu">
+
+        <div class="user_btns">
+        <span th:if="${writer != null}">    
+          <input type="button" name="writeBtn" value="수정" class="writeBtn">
+          <a th:href="@{/board/postDel(boardNum=${detailPost.boardNum})}"><input type="button" name="writeBtn" value="삭제" class="writeBtn" id="postDelBtn"></a>
+        </span>
+          <a th:href="@{/board/list}"><input type="button" name="writeBtn" value="목록" class="writeBtn"></a>
+        </div>
+
+      </div>
+
+
+    </div>
+		
+	</div>
+    
+
+
+
+  </body>
+</html>
